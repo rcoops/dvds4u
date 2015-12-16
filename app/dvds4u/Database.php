@@ -1,4 +1,5 @@
 <?php
+namespace rcoops\dvds4u;
 
 class Database {
 

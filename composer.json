@@ -1,0 +1,16 @@
+    {
+    "name": "dvds4u",
+    "description": "Online DVD store model",
+    "authors": [
+        {
+            "name": "rcoops",
+            "email": "R.P.Cooper1@edu.salford.ac.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "": "app/"
+        }
+    }
+}

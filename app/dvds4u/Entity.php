@@ -1,11 +1,7 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: rick
- * Date: 24/11/15
- * Time: 09:40
- */
+namespace dvds4u;
+
 class Client
 {
 

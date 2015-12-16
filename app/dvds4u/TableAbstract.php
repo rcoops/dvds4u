@@ -6,7 +6,7 @@
  * Date: 24/11/15
  * Time: 09:57
  */
-
+namespace rcoops\dvds4u;
 require_once 'Database.php';
 
 class TableAbstract
