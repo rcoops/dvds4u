@@ -2,7 +2,7 @@
 
 namespace dvds4u;
 
-class Client
+class Entity
 {
 
     protected $data = array();
@@ -23,4 +23,5 @@ class Client
         }
 
     }
+
 }

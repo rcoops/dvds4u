@@ -22,7 +22,7 @@
                 <nav class="navbar col-xs-3">
                     <ul class="nav">
                         <li>
-                            <a href="#">
+                            <a href="index.php">
                                 Home
                             </a>
                         </li>

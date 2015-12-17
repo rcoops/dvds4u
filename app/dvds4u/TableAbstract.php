@@ -1,13 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: rick
- * Date: 24/11/15
- * Time: 09:57
- */
-namespace rcoops\dvds4u;
-require_once 'Database.php';
+namespace dvds4u;
 
 class TableAbstract
 {
@@ -22,10 +15,13 @@ class TableAbstract
 
     public function fetchAll()
     {
-        $sql = 'SELECT * FROM ' . $this->name;;
+        $sql = 'SELECT * FROM ' . $this->name;
         $results = $this->dbh->prepare($sql);
         $results->execute();
-        return $results;
+
+        $entities = $this->getEntitiesAsArray($results);
+
+        return $entities;
     }
 
     public function fetchByPrimaryKey($key)
@@ -34,5 +30,20 @@ class TableAbstract
         $results = $this->dbh->prepare($sql);
         $results->execute([':id' => $key]);
         return $results->fetch();
+    }
+
+    protected function getEntitiesAsArray($results) {
+
+        $entities = array();
+        while($row = $results->fetch(\PDO::FETCH_ASSOC)) {
+            $entities[] = new Entity($row);
+        }
+
+        return $entities;
+    }
+
+    protected function getEntity($results)
+    {
+        return new Entity($results->fetch(\PDO::FETCH_ASSOC));
     }
 }

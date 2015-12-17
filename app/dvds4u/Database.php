@@ -1,5 +1,6 @@
 <?php
-namespace rcoops\dvds4u;
+
+namespace dvds4u;
 
 class Database {
 
@@ -7,10 +8,10 @@ class Database {
     protected $dbh;
 
     public static function getInstance() {
-        $username = 'dvds4u'; // connection info for helios.csesalford.com
-        $password = 'dvds4u'; // change this to the password provided
-        $host = 'baudgames.ddns.net';
-        $dbname = 'dvds4u';
+        $username = 'stb098'; // connection info for helios.csesalford.com
+        $password = '*stb098*'; // change this to the password provided
+        $host = 'helios.csesalford.com';
+        $dbname = 'stb098_dvds4u';
 
         if (self::$instance === null) { //checks if the object exists
             // creates new instance if not, sending in connection info
@@ -22,8 +23,8 @@ class Database {
 
     private function __construct($username, $password, $host, $database) {
         try {
-            $this->dbh = new PDO("mysql:host=$host;dbname=$database", $username, $password); // creates the database handler with connection info
-        } catch (PDOException $e) {
+            $this->dbh = new \PDO("mysql:host=$host;dbname=$database", $username, $password); // creates the database handler with connection info
+        } catch (\PDOException $e) {
             echo 'Sorry, the database has disappeared!' . '</br>' . $e->getMessage();
         }
     }
