@@ -1,6 +1,4 @@
 <?php
-define("ROOT", __DIR__ . '/');
-define("HTTP", $_SERVER['HTTP_HOST'] . '/DvdRental/');
 
 require_once 'app/init.php';
 

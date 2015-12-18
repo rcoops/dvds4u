@@ -1,12 +1,16 @@
                 </main>
+                <aside class="col-xs-3">
+                    <?php require_once ROOT . '../aside.php'; ?>
+                </aside>
             </div>
         </div>
         <footer class="footer">
             <div class="container footer-container">
-                <?php if( !isset($_SESSION['name'])): ?>
-                    <p>Not logged in</p>
+                <?php if(isset($_SESSION['user_first_name'])): ?>
+                    <p>Logged in as: <?= $_SESSION['user_first_name']; ?></p>
+
                 <?php else: ?>
-                    <p>Logged in as: </p><?= $_SESSION['name']; ?>
+                    <p>Not logged in</p>
                 <?php endif; ?>
             </div>
         </footer>

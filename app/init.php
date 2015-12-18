@@ -2,15 +2,15 @@
 
 namespace dvds4u;
 
-session_start();
+define("ROOT", __DIR__ . '/');
+define("HTTP", $_SERVER['HTTP_HOST'] . '/DvdRental/');
+
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $view = new \stdClass(); // Think about this for different pages
-
-$usersTable = new \dvds4u\UsersTable();
-$filmsTable = new \dvds4u\FilmsTable();
-//$allClientInfo = $clientsTable->fetchAll();
-//$allFilmInfo = $filmsTable->fetchAll();
 
 //    foreach($view->clientsTable as $clientData) {
 //        echo "<tr>"

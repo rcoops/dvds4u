@@ -19,9 +19,7 @@ class TableAbstract
         $results = $this->dbh->prepare($sql);
         $results->execute();
 
-        $entities = $this->getEntitiesAsArray($results);
-
-        return $entities;
+        return $results;
     }
 
     public function fetchByPrimaryKey($key)
@@ -42,8 +40,12 @@ class TableAbstract
         return $entities;
     }
 
-    protected function getEntity($results)
+    protected function getEntity($result)
     {
-        return new Entity($results->fetch(\PDO::FETCH_ASSOC));
+        $entity = null;
+        if($result->rowCount() > 0) {
+            $entity = new Entity($result->fetch(\PDO::FETCH_ASSOC));
+        }
+        return $entity;
     }
 }

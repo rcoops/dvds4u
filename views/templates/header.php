@@ -58,4 +58,4 @@
                         </li>
                     </ul>
                 </nav>
-                <main class="col-xs-9">
+                <main class="col-xs-6">
