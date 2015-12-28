@@ -1,4 +1,4 @@
-    {
+{
     "name": "dvds4u",
     "description": "Online DVD store model",
     "authors": [
@@ -12,5 +12,8 @@
         "psr-4": {
             "": "app/"
         }
+    },
+    "require": {
+        "swiftmailer/swiftmailer": "^5.4"
     }
 }

@@ -1,5 +1,10 @@
 .titlebar {
-    border-bottom: 5px #c00040 solid;
+    border-bottom: 8px #B20C1B solid;
+    margin-bottom: 10px;
+}
+
+.titlebar figure {
+    margin-bottom: 5px;
 }
 
 .navbar {
@@ -8,18 +13,75 @@
 
 .nav > li > a {
     border: 1px solid white;
-    background-color: #dbdbdb;
-    color: #c00040;
+    border-radius: 4px;
+    background-color: #B20C1B;
+    color: white;
+    font-weight: bold;
+}
+
+.nav > li > a:hover {
+    background-color: #ef1024;
+    color: black;
 }
 
 .footer-container {
-    background-color: #000000;
+    border-radius: 4px;
+    background-color: #B20C1B;
     padding: 20px;
     color: white;
+    font-weight: bold;
     height: 100%;
 }
 
-.footer p {
+.align-right {
     margin: 0;
     text-align: right;
+}
+
+.gallery-section {
+    display: inline-block;
+    vertical-align: bottom;
+    position: relative;
+    height: 341px;
+}
+
+figure {
+    display: table;
+}
+
+figcaption {
+    display: table-caption;
+    caption-side: bottom;
+    text-align: center;
+}
+
+.gallery-section form {
+    position: absolute;
+    width: calc(100% - 20px);
+    bottom: 5px;
+}
+
+.gallery-section button {
+    width: 100%;
+}
+
+.filters label {
+    text-align: center;
+}
+
+.centre {
+    margin: 10px auto 0 auto;
+    display: block;
+}
+
+.float-right {
+    float: right;
+}
+
+.big-image {
+    margin: 0 auto 15px auto;
+}
+
+h5 {
+    font-weight: bold;
 }
