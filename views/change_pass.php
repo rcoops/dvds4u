@@ -34,7 +34,7 @@
                 </p>
             </form>
             <?php if(isset($view->errorMessage)): ?>
-                <div class="alert alert-danger">
+                <div class="alert alert-danger fade">
                     <span class="glyphicon glyphicon-warning-sign"></span>
                     <strong><?= $view->errorMessage ?></strong>
                     <?php if(isset($view->errors)): ?>
@@ -49,7 +49,7 @@
         </article>
     </section>
 <?php else: ?>
-    <div class="alert alert-success">
+    <div class="alert alert-success fade">
         <span class="glyphicon glyphicon-ok-circle"></span>
         <?= $view->success ?>
     </div>

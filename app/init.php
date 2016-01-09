@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once 'profile_functions.php';
+require_once 'shared_functions.php';
 
 if(session_status() === PHP_SESSION_NONE) {                      // Only start a new session if not one started
     session_start();
