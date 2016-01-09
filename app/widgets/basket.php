@@ -16,17 +16,6 @@ if(isset($_SESSION['basket'])) {
             $arrFilm['title']   = $film->__get('title');
             $arrFilm['price']   = getStrPrice($film);
             $priceBands[]       = $film->__get('price_band');
-//            switch($price) {
-//                case 1:
-//                    $arrFilm['price'] = '£3.50';
-//                    break;
-//                case 2:
-//                    $arrFilm['price'] = '£2.50';
-//                    break;
-//                default:                                                // Set as default to ensure a price is set
-//                    $arrFilm['price'] = '£1.00';
-//                    break;
-//            }
             $view->film[$filmId] = $arrFilm;
         }
     }
