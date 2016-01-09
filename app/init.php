@@ -1,16 +1,15 @@
 <?php
 
-namespace dvds4u;
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once 'profile_functions.php';
 
-if(session_status() == PHP_SESSION_NONE) {
+if(session_status() === PHP_SESSION_NONE) {                      // Only start a new session if not one started
     session_start();
 }
-require_once __DIR__ . '/../vendor/autoload.php';
 
 $view = new \stdClass();
 
-if(isset($_POST['logout'])) {
-    header('Location:index.php');
-} else if(isset($_POST['login']) || isset($_POST['remove'])) { // Make sure the widget updates the page everywhere
-    header('Refresh:0');
+// Make sure the widget refreshes the basket on any page (e.g. checkout page)
+if(isset($_POST['remove'])) {
+    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . $_SERVER['PHP_SELF'] . '">';
 }

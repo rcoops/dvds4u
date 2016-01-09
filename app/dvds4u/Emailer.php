@@ -6,6 +6,7 @@ class Emailer
 {
     private $to, $subject, $body, $site;
 
+    // Constructs a new e-mail object setting required values
     public function __construct($to, $hash)
     {
         $this->site = 'localhost:8000';
@@ -14,6 +15,7 @@ class Emailer
         $this->body = $this->getBody($to, $hash);
     }
 
+    // Creates the e-mail and sends it
     public function sendEmail()
     {
         $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
@@ -32,11 +34,12 @@ class Emailer
         try {
             $mailer->send($message);
             return true;
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             return $e->getMessage();
         }
     }
 
+    // Template body with user specific fields
     private function getBody($to, $hash)
     {
         return '

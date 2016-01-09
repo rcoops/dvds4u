@@ -2,9 +2,11 @@
 
 namespace dvds4u;
 
+// Models our films table in the database
 class FilmsTable extends TableAbstract
 {
 
+    // Populate table name
     protected $tableName = 'films';
 
     // Table attributes
@@ -12,14 +14,27 @@ class FilmsTable extends TableAbstract
     protected $title = 'title';
     protected $yearOfRelease = 'year_of_release';
     protected $priceBand = 'price_band';
-    protected $picture = 'picture';
     protected $synopsis = 'synopsis';
     protected $directorId = 'director_id';
     protected $clientId = 'client_id';
+    protected $image = 'image';
 
-    protected function fetchByFilters($filters)
+    // Returns a set of film entities selected by a set of filters
+    public function fetchFilteredFilms($filters)
     {
-        $sql = "SELECT * FROM $this->tableName WHERE $this->title LIKE :title"; // Can always include a partial title
+        $results = $this->fetchByFilters($filters);
+        $entities = [];
+        while($row = $results->fetch(\PDO::FETCH_ASSOC)) {                      // Only want assoc array
+            $entities[] = new Entity($row);
+        }
+        return $entities;
+    }
+
+    // Returns all rows selected by a set of filters
+    private function fetchByFilters($filters)
+    {
+        $sql = "SELECT * FROM $this->tableName"                                 // Can use partial/empty title
+            . " WHERE $this->title LIKE :title";
         foreach($filters as $attribute => $value) {                             // Associative attribute and value
             if($value) {
                 switch($attribute) {
@@ -39,8 +54,8 @@ class FilmsTable extends TableAbstract
                     case 'actor':
                         $actorsTable = new ActorsTable();
                         $starsActorTable = new StarsActorTable();
-                        $id = $actorsTable->fetchIdsBySurname($value);
-                        $films = $starsActorTable->fetchFilmIds($id);
+                        $ids = $actorsTable->fetchIdsBySurname($value);
+                        $films = $starsActorTable->fetchFilmIds($ids);
                         $sql .=  " AND $this->primaryKey IN($films)";
                         break;
                     case 'year_from':
@@ -52,17 +67,21 @@ class FilmsTable extends TableAbstract
                     case 'price':
                         $sql .= " AND $this->priceBand = $value";
                         break;
+                    // Do nothing if we don't recognise the key
+                    default:
                 }
             }
         }
         $results = $this->dbh->prepare($sql);
-        $results->execute([':title' => '%' . $filters['title'] . '%']);
+        $results->execute([':title' => '%' . $filters[$this->title] . '%']);
         return $results;
     }
 
-    public function fetchFilteredFilms($filters)
+    public function fetchFilmsRented($id)
     {
-        $results = $this->fetchByFilters($filters);
+        $sql = "SELECT * FROM $this->tableName WHERE $this->clientId = :id";
+        $results = $this->dbh->prepare($sql);
+        $results->execute([':id' => $id]);
         $entities = [];
         while($row = $results->fetch(\PDO::FETCH_ASSOC)) {                      // Only want assoc array
             $entities[] = new Entity($row);
@@ -70,8 +89,4 @@ class FilmsTable extends TableAbstract
         return $entities;
     }
 
-    public function getClientField()
-    {
-        return $this->clientId;
-    }
 }

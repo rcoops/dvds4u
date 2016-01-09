@@ -1,27 +1,25 @@
 <section class="panel panel-default">
-    <header class="panel-heading">
-        <h3>Sign in</h3>
-    </header>
-    <article class="panel-body">
+    <form class="form-signin" action="<?= $view->currentPage; ?>" method="post">
+        <header><h2 class="form-signin-heading">Sign in</h2></header>
+        <fieldset>
+            <label for="email" class="sr-only">Email address</label><!-- Invisible except to screenreaders -->
+            <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+        </fieldset>
+        <fieldset>
+            <label for="password" class="sr-only">Password</label><!-- Invisible except to screenreaders -->
+            <input type="password" name="password" class="form-control" autocomplete="off" placeholder="Password"
+                   required>
+        </fieldset>
+        <button name="login" type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+        <button name="reset" type="reset" class="btn btn-lg btn-primary btn-block">Clear</button>
+    </form>
+    <div class="signin-body">
         <p>If you have not already registered, <a href="register.php">register here</a></p>
-        <p><strong>Log in</strong> using your <strong>email address</strong> and password:</p>
-        <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
-            <fieldset class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" name="email" class="form-control">
-            </fieldset>
-            <fieldset class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" name="password" class="form-control">
-            </fieldset>
-            <button name="login" type="submit" class="btn btn-primary">Sign in</button>
-            <button name="reset" type="reset" class="btn btn-primary">Clear</button>
-        </form>
         <?php if(isset($view->error)): ?>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger fade">
                 <span class="glyphicon glyphicon-warning-sign"></span>
                 <?= $view->error ?>
             </div>
         <?php endif; ?>
-    </article>
+    </div>
 </section>

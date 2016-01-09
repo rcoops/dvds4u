@@ -7,6 +7,9 @@
     <title><?= $view->pageTitle ?></title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- http://v4-alpha.getbootstrap.com/examples/signin/ -->
+    <link rel="stylesheet" href="/css/signin.css">
+    <!-- http://v4-alpha.getbootstrap.com/examples/sticky-footer/ -->
     <link rel="stylesheet" href="/css/sticky-footer.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -14,7 +17,7 @@
 <div class="container">
     <div class="row titlebar">
         <figure>
-            <img src="/images/logo.png" height="100px" />
+            <img src="/images/logo.png" height="100px"/>
         </figure>
     </div>
     <div class="row">
@@ -31,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="basket.php">
+                    <a href="checkout.php">
                         Checkout
                     </a>
                 </li>

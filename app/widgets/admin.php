@@ -1,1 +1,3 @@
-<?php require_once 'app/init.php';
+<?php
+
+require_once 'views/widgets/admin.php';

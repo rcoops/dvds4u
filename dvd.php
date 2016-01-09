@@ -1,33 +1,80 @@
 <?php
-require_once 'app/init.php';
-$filmsTable = new \dvds4u\FilmsTable();
-$hasActorsTable = new \dvds4u\StarsActorTable();
-$actorsTable = new \dvds4u\ActorsTable();
-$directorsTable = new \dvds4u\DirectorsTable();
 
-$film = $filmsTable->fetchByPrimaryKey($_GET['fid']);
+require_once 'app/init.php';
+
+$filmsTable = new \dvds4u\FilmsTable();
+// Assign to session to prevent page refresh from removing id
+if(isset($_GET['film_id'])) {
+    $_SESSION['film_id']    = $_GET['film_id'];
+    $film                   = $filmsTable->fetchByPrimaryKey($_GET['film_id']);
+} else {
+    $film = $filmsTable->fetchByPrimaryKey($_SESSION['film_id']);
+}
 
 $view->pageTitle = $film->__get('title');
-$view->year = $film->__get('year_of_release');
-$price = $film->__get('price_band');
-switch($price) {
-    case 1:
-        $view->price = '£3.50';
-        break;
-    case 2:
-        $view->price = '£2.50';
-        break;
-    default:                                                // Set as default to ensure a price is set
-        $view->price = '£1.00';
-        break;
-}
-$view->picture = $film->__get('picture');
-$view->synopsis = $film->__get('synopsis');
-$view->director = $directorsTable->fetchName($film->__get('director_id'));
-$view->rentable = (isset($_SESSION['user_id']) && !$film->__get('client_id'));
-// Sub-query: fetch all names from actors where id=(fetch all ids from has_actors where film id = id)
-$view->actors = $actorsTable->fetchNames($hasActorsTable->fetchActorIds($film->__get('id')));
-$view->totalCast = count($view->actors) - 1;                // Set to -1 as last actor gets added to view without ','
-$view->id = $film->__get('id');
+
+$view->year         = $film->__get('year_of_release');
+$view->price        = getPrice($film);
+$view->pK           = $film->__get('id');
+$view->image        = base64_encode($film->__get('image'));
+$view->genre        = getGenres($film);
+$view->synopsis     = $film->__get('synopsis');
+$view->director     = getDirector($film);
+$view->rentable     = isRentable($film);
+$view->cast         = getCast($film);                               // Chop off the first ', '
 
 require_once 'views/dvd.php';
+
+function getPrice($film)
+{
+    $priceBand  = $film->__get('price_band');
+    $price      = '£1.00';                                          // Set default to ensure it has a price
+    if($priceBand == 1) {
+        $price = '£3.50';
+    } else if($priceBand == 2) {
+        $price = '£2.50';
+    }
+    return $price;
+}
+
+function getGenres($film)
+{
+    $hasGenreTable  = new \dvds4u\HasGenreTable();
+    $genresTable    = new \dvds4u\GenresTable();
+    $filmPK         = $film->__get('id');                           // Get film id
+    $genresOfFilm   = $hasGenreTable->fetchGenreIdsByFilmIds($filmPK);
+    $genres         = $genresTable->fetchGenres($genresOfFilm);
+    $strGenres      = '';
+    foreach($genres as $genre) {
+        $strGenres .= '/' . $genre;
+    }
+    return substr($strGenres, 1);
+}
+
+function getCast($film)
+{
+    $hasActorsTable = new \dvds4u\StarsActorTable();
+    $actorsTable    = new \dvds4u\ActorsTable();
+    $filmPK         = $film->__get('id');                           // Get film id
+    $actorsInFilm   = $hasActorsTable->fetchActorIds($filmPK);      // Get actor ids linked to film id
+    $actors         = $actorsTable->fetchNames($actorsInFilm);      // Get actor names linked to actor ids
+    $strActors      = '';
+    foreach($actors as $actor) {
+        $strActors .= ', ' . $actor;                                // Stick them in a comma separated string
+    }
+    return substr($strActors, 2);
+}
+
+function getDirector($film)
+{
+    $directorsTable = new \dvds4u\DirectorsTable();
+    $director       = $film->__get('director_id');
+    return $directorsTable->fetchName($director);
+}
+
+function isRentable($film)
+{
+    $loggedIn   = isset($_SESSION['user_id']);
+    $rented     = !$film->__get('client_id');
+    return ($loggedIn && $rented);
+}

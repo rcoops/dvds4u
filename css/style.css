@@ -82,6 +82,65 @@ figcaption {
     margin: 0 auto 15px auto;
 }
 
+.fig-thumb {
+    padding: 0 5px;
+}
+
+.fig-thumb img {
+    width: 152px;
+}
+
 h5 {
     font-weight: bold;
+}
+
+.glyphicon-asterisk {
+  color: red;
+}
+
+.signin-body {
+    padding: 0 15px 0 15px;
+}
+
+.fade {
+    opacity: 1;
+    -moz-animation: fadeAnimation 9s ease-in 0s forwards, disappearAnimation 0s ease-out 7s forwards;
+    /* Firefox */
+    -webkit-animation: fadeAnimation 9s ease-in 0s forwards, disappearAnimation 0s ease-out 7s forwards;
+    /* Safari and Chrome */
+    -o-animation: fadeAnimation 9s ease-in 0s forwards, disappearAnimation 0s ease-out 7s forwards;
+    /* Opera */
+    animation: fadeAnimation 9s ease-in 0s forwards, disappearAnimation 0s ease-out 7s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes disappearAnimation {
+    to {
+        width:0;
+        height:0;
+        padding:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes disappearAnimation {
+    to {
+        width:0;
+        height:0;
+        padding:0;
+        visibility:hidden;
+    }
+}
+
+@keyframes fadeAnimation {
+    to {
+        opacity:0;
+        filter: alpha(opacity=0);
+    }
+}
+
+@-webkit-keyframes fadeAnimation {
+    to {
+        opacity:0;
+    }
 }

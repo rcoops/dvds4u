@@ -6,13 +6,15 @@
 </div>
 <footer class="footer">
     <div class="container footer-container">
+        <p class="align-right">
         <?php if(isset($_SESSION['name'])): ?>
-            <p class="align-right">Logged in as: <?= $_SESSION['name']; ?></p>
+            Logged in as: <?= $_SESSION['name']; ?>
         <?php else: ?>
-            <p class="align-right">Not logged in</p>
+            Not logged in
         <?php endif; ?>
+        </p>
     </div>
 </footer>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,1 +1,2 @@
+# Prevent a directory listing of this directory and subdirectories
 Options -Indexes
