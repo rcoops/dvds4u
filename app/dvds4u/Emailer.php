@@ -4,6 +4,7 @@ namespace dvds4u;
 
 class Emailer
 {
+
     private $to, $subject, $body, $site;
 
     // Constructs a new e-mail object setting required values
@@ -18,6 +19,7 @@ class Emailer
     // Creates the e-mail and sends it
     public function sendEmail()
     {
+        // Create transport to be used by the mailer
         $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
             ->setUsername('donotreply.dvds4u')
             ->setPassword('W^x j^m 1n s3v3n c0l0urs');

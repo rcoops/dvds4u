@@ -4,7 +4,7 @@
             <h2>Register</h2>
         </header>
         <article class="panel-body">
-            <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
+            <form action="<?= $_SERVER['PHP_SELF']; ?>#anchor" method="post">
                 <fieldset class="form-group">
                     <label for="nick_name">Nickname:</label>
                     <input type="text" name="nick_name" class="form-control" id="nick_name"
@@ -63,8 +63,8 @@
                     </label>
                     <input type="password" name="password_confirm" class="form-control" id="password_confirm" />
                 </fieldset>
-                <button name="submit" type="submit" class="btn btn-primary">Register</button>
-                <p class="float-right">
+                <button name="submit" type="submit" class="btn btn-primary" id="anchor">Register</button>
+                <p class="pull-right">
                     <span class="glyphicon glyphicon-asterisk"></span>
                     - Required field
                 </p>

@@ -104,6 +104,8 @@
             <a href="<?= $film['url']; ?>">
                 <img src="data:image/jpeg;base64,<?= $film['image']; ?>" alt="<?= $film['title']; ?>"
                      class="img-thumbnail" />
+<!--                <img src="images/dvds/--><?php //echo $film['imageName']; ?><!--" alt="--><?php //echo $film['title']; ?><!--"-->
+<!--                     class="img-thumbnail" />-->
             </a>
             <figcaption><h5><?= $film['title']; ?></h5></figcaption>
         </figure>

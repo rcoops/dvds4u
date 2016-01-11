@@ -39,7 +39,7 @@
                            value="<?= $view->user['phone_number']; ?>"/>
                 </fieldset>
                 <button name="submit" type="submit" class="btn btn-primary">Update</button>
-                <p class="float-right">
+                <p class="pull-right">
                     <span class="glyphicon glyphicon-asterisk"></span>
                     - Required field
                 </p>

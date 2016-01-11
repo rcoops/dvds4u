@@ -12,7 +12,7 @@ if(!empty($_POST)) {                                                    // Nothi
     $confirmPassword    = $_POST['password_confirm'];
 
     if(isError($view->newUser, $confirmEmail, $confirmPassword)) {
-        $view->errorMessage = 'You\'ve got something wrong! :';
+        setError($view);
         if(hasEmptyField($view->newUser)) {                                   // All fields must be completed
             $view->errors[] = 'All required fields must be entered!';
         }
@@ -27,7 +27,8 @@ if(!empty($_POST)) {                                                    // Nothi
         }
     } else {
         if($usersTable->fetchByEmail($view->newUser['email'])) {        // Already in DB
-            $view->error = 'You\'re already signed up under that email!';
+            setError($view);
+            $view->errors[] = 'You\'re already signed up under that email!';
         } else {
             $usersTable->addUser($view->newUser);
             sendEmail($view->newUser['email'], $usersTable);
@@ -47,4 +48,10 @@ function sendEmail($email, $usersTable)
     $_SESSION['ver_hash'] = $user->__get('hash');
     $email = new \dvds4u\Emailer($_SESSION['ver_email'], $_SESSION['ver_hash']);
     $email->sendEmail();
+}
+
+// Sets an error message to also use as a flag in the view
+function setError(&$view)
+{
+    $view->errorMessage = 'You\'ve got something wrong! :';
 }

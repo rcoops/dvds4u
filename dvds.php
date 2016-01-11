@@ -156,15 +156,14 @@ function getFilmIds($films)
 function getFilmArray($films)
 {
     $arrFilms = [];
-    $loggedIn = isset($_SESSION['user_id']);
     foreach($films as $film) {
-        $rented     = !$film->__get('client_id');
         $arrFilms[] = [
             'id'        => $film->__get('id'),
             'title'     => $film->__get('title'),
-            'rentable'  => ($loggedIn && $rented),                                  // Logged in and no client_id
+            'rentable'  => isRentable($film),                                  // Logged in and no client_id
             'url'       => 'dvd.php?film_id=' . $film->__get('id'),
             'image'     => base64_encode($film->__get('image')),
+//            'imageName' => $film->__get('image_name'),
         ];
     }
     return $arrFilms;

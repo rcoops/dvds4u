@@ -15,7 +15,9 @@
                         <td>
                             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
                                 <input type="hidden" name="film_id" value="<?= $id; ?>"/>
-                                <button name="remove" type="submit" class="btn btn-sm btn-primary float-right">Remove
+                                <label for="remove" class="sr-only">Remove</label>
+                                <button name="remove" type="submit" class="close" aria-hidden="true" id="remove">
+                                    &times;
                                 </button>
                             </form>
                         </td>
@@ -23,11 +25,11 @@
                 <?php endforeach; ?>
                 <tr>
                     <td colspan="2"><strong>Total:</strong></td>
-                    <td class="align-right"><?= $view->total; ?></td>
+                    <td><?= $view->total; ?></td>
                 </tr>
                 </tbody>
             </table>
-            <p class="align-right"><a class="btn btn-primary" href="checkout.php">Checkout</a></p>
+            <a class="btn btn-primary pull-right" href="checkout.php">Checkout</a>
         <?php endif; ?>
     </article>
 </section>

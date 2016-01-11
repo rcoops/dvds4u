@@ -11,7 +11,8 @@
                         <label for="password">Please verify password to continue
                             <span class="glyphicon glyphicon-asterisk"></span>:
                         </label>
-                        <input type="password" name="password" class="form-control" id="password" autocomplete="off" />
+                        <input type="password" name="password" class="form-control" id="password" autocomplete="off"
+                               required/>
                     </fieldset>
                     <button name="submit" type="submit" class="btn btn-primary">Verify</button>
                 <?php else: ?>
@@ -19,17 +20,17 @@
                         <label for="new_pass">New password
                             <span class="glyphicon glyphicon-asterisk"></span>:
                         </label>
-                        <input type="password" name="new_pass" class="form-control" id="new_pass" />
+                        <input type="password" name="new_pass" class="form-control" id="new_pass" required />
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="conf_pass">Confirm password
                             <span class="glyphicon glyphicon-asterisk"></span>:
                         </label>
-                        <input type="password" name="conf_pass" class="form-control" id="conf_pass" />
+                        <input type="password" name="conf_pass" class="form-control" id="conf_pass" required />
                     </fieldset>
                     <button name="submit" type="submit" class="btn btn-primary">Update</button>
                 <?php endif; ?>
-                <p class="float-right">
+                <p class="pull-right">
                     <span class="glyphicon glyphicon-asterisk"></span> - Required field
                 </p>
             </form>

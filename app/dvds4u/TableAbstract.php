@@ -14,12 +14,6 @@ class TableAbstract
         $this->dbh = $this->db->getDbh();
     }
 
-    // Returns the value of the table's primary key
-    public function getAttPK()
-    {
-        return $this->primaryKey;
-    }
-
     // Fetches all rows from the table
     protected function fetchAll()
     {

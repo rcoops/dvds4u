@@ -91,6 +91,14 @@ function getTotal($priceBands)
     return $total;
 }
 
+// Whether the user is logged in and film is not rented
+function isRentable($film)
+{
+    $loggedIn   = isset($_SESSION['user_id']);
+    $rented     = !$film->__get('client_id');
+    return ($loggedIn && $rented);
+}
+
 function getStrPrice($film)
 {
     $priceBand  = $film->__get('price_band');

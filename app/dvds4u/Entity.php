@@ -5,7 +5,8 @@ namespace dvds4u;
 class Entity
 {
 
-    protected $data = array();
+    // Each attribute as a key and its value
+    protected $data = [];
 
     // Constructs the entity from a fetched database row
     public function __construct($dbrow)

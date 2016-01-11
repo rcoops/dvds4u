@@ -26,8 +26,9 @@
                     </td>
                     <td>
                         <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
-                            <input type="hidden" name="film_id" value="<?= $id; ?>"/>
-                            <button name="remove" type="submit" class="btn btn-sm btn-primary float-right">Remove
+                            <input type="hidden" name="film_id" value="<?= $id; ?>" />
+                            <button name="remove" type="submit" class="btn btn-sm btn-primary pull-right">
+                                Remove
                             </button>
                         </form>
                     </td>
@@ -40,9 +41,21 @@
         <?php endif; ?>
         </tbody>
     </table>
-    <form action="checkout.php" method="post">
-        <button name="rent" type="submit" class="btn btn-lg btn-primary float-right">Rent DVDs</button>
+    <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
+        <button name="rent" type="submit" class="btn btn-lg btn-primary pull-right"
+            <?= (empty($view->basket)) ? ' disabled' : ''; ?>>
+            Rent DVDs
+        </button>
     </form>
+    <?php if(isset($view->error)): ?>
+        <div class="alert alert-danger fade">
+            <span class="glyphicon glyphicon-warning-sign"></span>
+            <strong><?= $view->error; ?></strong>
+            <?php foreach($view->rentedFilms as $film): ?>
+                <p><?= $film; ?></p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 <?php else: ?>
     <div class="alert alert-success">
         <span class="glyphicon glyphicon-ok-circle"></span>

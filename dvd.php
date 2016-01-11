@@ -14,9 +14,10 @@ if(isset($_GET['film_id'])) {
 $view->pageTitle = $film->__get('title');
 
 $view->year         = $film->__get('year_of_release');
-$view->price        = getPrice($film);
+$view->price        = getStrPrice($film);
 $view->pK           = $film->__get('id');
 $view->image        = base64_encode($film->__get('image'));
+//$view->imageName    = $film->__get('image_name');
 $view->genre        = getGenres($film);
 $view->synopsis     = $film->__get('synopsis');
 $view->director     = getDirector($film);
@@ -24,18 +25,6 @@ $view->rentable     = isRentable($film);
 $view->cast         = getCast($film);                               // Chop off the first ', '
 
 require_once 'views/dvd.php';
-
-function getPrice($film)
-{
-    $priceBand  = $film->__get('price_band');
-    $price      = '£1.00';                                          // Set default to ensure it has a price
-    if($priceBand == 1) {
-        $price = '£3.50';
-    } else if($priceBand == 2) {
-        $price = '£2.50';
-    }
-    return $price;
-}
 
 function getGenres($film)
 {
@@ -70,11 +59,4 @@ function getDirector($film)
     $directorsTable = new \dvds4u\DirectorsTable();
     $director       = $film->__get('director_id');
     return $directorsTable->fetchName($director);
-}
-
-function isRentable($film)
-{
-    $loggedIn   = isset($_SESSION['user_id']);
-    $rented     = !$film->__get('client_id');
-    return ($loggedIn && $rented);
 }
